@@ -2,8 +2,8 @@ const ContactForm = require('../models/contactForm');
 
 exports.createContactForm = async (req, res) => {
   try {
-    const { name, email, phone, radios, message } = req.body;
-    const contactForm = new ContactForm({ name, email, phone, radios, message });
+    const { firstName,lastName, email, phone, radios, comments } = req.body;
+    const contactForm = new ContactForm({ firstName,lastName, email, phone, radios, comments });
     await contactForm.save();
     res.status(201).json(contactForm);
   } catch (err) {

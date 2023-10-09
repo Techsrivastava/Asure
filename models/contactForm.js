@@ -1,7 +1,14 @@
 const mongoose = require('mongoose');
 
+// Define the options for the dropdown
+const radioOptions = ['candidate', 'Company'];
+
 const contactFormSchema = new mongoose.Schema({
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
     type: String,
     required: true,
   },
@@ -10,14 +17,16 @@ const contactFormSchema = new mongoose.Schema({
     required: true,
   },
   phone: {
-    type: String, // Assuming the phone field is a string
+    type: String,
     required: true,
   },
+  // Change the "radios" field to a dropdown (select)
   radios: {
-    type: String, // Assuming radios is a string, you can adjust the type as needed
+    type: String,
     required: true,
+    enum: radioOptions, // Use the predefined options
   },
-  message: {
+  comments: {
     type: String,
     required: true,
   },

@@ -18,7 +18,7 @@ app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 mongoose
-  .connect('mongodb+srv://adarsh:Adarsh%40123@cluster0.t0egmdr.mongodb.net/?retryWrites=true&w=majority', {
+  .connect('mongodb+srv://adarsh00761:SMh3aM8Smo6gdqjX@cluster0.srwvuso.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

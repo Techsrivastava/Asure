@@ -4,17 +4,17 @@ const Company = require('../models/company');
 
 exports.createCompany = async (req, res) => {
     try {
-        const { name, email, password, website, industry, foundedYear, location } = req.body;
+        const { name, email,  website, industry, foundedYear, location } = req.body;
 
         console.log('Received company data:', req.body); // Log the received data
 
         // Check if required fields are missing
-        if (!name || !email || !password || !website || !industry || !foundedYear || !location) {
+        if (!name || !email || !website || !industry || !foundedYear || !location) {
             console.error('Missing required fields'); // Log the error
             console.log('Creating a new company...');
             console.log('Name:', name);
             console.log('Email:', email);
-            console.log('Password:', password);
+            
             console.log('Website:', website);
             console.log('Industry:', industry);
             console.log('Founded Year:', foundedYear);
@@ -23,7 +23,7 @@ exports.createCompany = async (req, res) => {
         }
 
 
-        const company = new Company({ name, email, password, website, industry, foundedYear, location });
+        const company = new Company({ name, email, website, industry, foundedYear, location });
 
         // Save the company to the database
         try {
