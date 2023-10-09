@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Define the options for the dropdown
-const radioOptions = ['candidate', 'Company'];
+const radioOptions = ['Candidate', 'Company'];
 
 const contactFormSchema = new mongoose.Schema({
   firstName: {
