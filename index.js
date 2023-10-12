@@ -3,14 +3,16 @@ const app = express();
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userREoutes");
 const cors = require("cors");
+const bodyParser = require('body-parser')
 const candidateRoutes = require("./routes/candidateRoutes");
 
 const jobPostingRoutes = require("./routes/jobPostingRoutes");
 const contactFormRoutes = require("./routes/contactFormRoutes");
 const companyRoutes = require("./routes/companyRoutes");
+const adminRoutes = require('./routes/Routes');
 const path = require("path");
 
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use(express.static("uploads"));
@@ -41,6 +43,8 @@ app.use("/contactforms", contactFormRoutes);
 // include Company Routes
 app.use("/company", companyRoutes);
 // include Candidate form
+//admin
+app.use('/admin', adminRoutes);
 
 // Define middleware, routes, and other configurations
 app.get("/", (req, res) => {
