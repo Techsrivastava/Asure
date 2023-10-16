@@ -12,4 +12,9 @@ router.get('/:companyId', companyController.getCompany);
 // Get all companies
 router.get('/', companyController.getAllCompanies);
 
+router.get('/downloadExcel', companyController.downloadToExcel);
+
+router.post('/deleteSelected', companyController.deleteSelectedCompanies);
+
+
 module.exports = router;

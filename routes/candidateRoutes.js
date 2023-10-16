@@ -21,5 +21,11 @@ const upload = multer({ storage });
 // Routes
 router.post('/candidates', upload.single('resume'), candidateController.createCandidate);
 router.get('/candidates', candidateController.getAllCandidates);
+// New routes for the additional features
+router.post('/candidates/delete', candidateController.deleteCandidates); // Delete candidates by ID
+// New route for deleting selected candidates
+router.delete('/candidates/delete', candidateController.deleteSelectedCandidates);
+
+router.get('/candidates/export/excel', candidateController.exportCandidatesToExcel); // Export candidates to Excel
 
 module.exports = router;

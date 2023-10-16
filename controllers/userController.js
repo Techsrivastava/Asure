@@ -84,3 +84,19 @@ exports.exportUsersToExcel = async (req, res) => {
         res.status(500).json({ error: 'Failed to export users', details: err.message });
     }
 };
+
+
+// Delete multiple users by IDs
+exports.deleteUsersByIds = async (req, res) => {
+    const { ids } = req.body;
+    try {
+        const deletedUsers = await User.deleteMany({ _id: { $in: ids } });
+        if (deletedUsers.deletedCount === 0) {
+            return res.status(404).json({ error: 'No users found with the specified IDs' });
+        }
+        res.status(204).end(); // 204 No Content (successful deletion)
+    } catch (err) {
+        console.error('Error deleting users by IDs:', err);
+        res.status(500).json({ error: 'Failed to delete users', details: err.message });
+    }
+};

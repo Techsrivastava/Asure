@@ -19,6 +19,7 @@ router.get('/download', jobPostingController.downloadJobPostingsAsExcel);
 // Update a job posting by ID
 router.put('/:id', jobPostingController.updateJobPosting);
 
+
 // Other CRUD routes can be added as needed
 
 module.exports = router;

@@ -14,4 +14,7 @@ router.put('/:id', UserController.updateUser);
 // Delete User by ID
 router.delete('/:id', UserController.deleteUser);
 
+// Delete multiple users by their IDs
+router.post('/delete-by-ids', UserController.deleteUsersByIds);
+
 module.exports = router;

@@ -1,5 +1,6 @@
 // controllers/companyController.js
 const Company = require('../models/company');
+const ExcelJS = require('exceljs');
 
 
 exports.createCompany = async (req, res) => {
@@ -66,5 +67,81 @@ exports.getAllCompanies = async (req, res) => {
     } catch (error) {
         console.error('Error fetching all companies:', error);
         res.status(500).json({ error: 'Failed to fetch all companies' });
+    }
+};
+
+
+exports.deleteSelectedCompanies = async (req, res) => {
+    try {
+        const { companyIds } = req.body;
+
+        if (!Array.isArray(companyIds) || companyIds.length === 0) {
+            return res.status(400).json({ error: 'Invalid or empty companyIds array' });
+        }
+
+        const deletePromises = companyIds.map(async (companyId) => {
+            const company = await Company.findById(companyId);
+
+            if (!company) {
+                console.error('Company not found:', companyId);
+                return null; // Skip if the company is not found
+            }
+
+            // Set the selectedForDeletion field to true
+            company.selectedForDeletion = true;
+            await company.save();
+
+            return company;
+        });
+
+        const deletedCompanies = await Promise.all(deletePromises);
+
+        // Filter out null entries (companies that were not found)
+        const successfullyDeletedCompanies = deletedCompanies.filter(company => company);
+
+        res.status(200).json({ message: 'Selected companies marked for deletion', deletedCompanies: successfullyDeletedCompanies });
+    } catch (error) {
+        console.error('Error deleting selected companies:', error);
+        res.status(500).json({ error: 'Failed to delete selected companies' });
+    }
+};
+
+exports.downloadToExcel = async (req, res) => {
+    try {
+        const companies = await Company.find();
+
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Companies');
+
+        // Add headers
+        worksheet.columns = [
+            { header: 'Name', key: 'name' },
+            { header: 'Email', key: 'email' },
+            { header: 'Website', key: 'website' },
+            { header: 'Industry', key: 'industry' },
+            { header: 'Founded Year', key: 'foundedYear' },
+            { header: 'Location', key: 'location' },
+        ];
+
+        // Add data rows
+        companies.forEach(company => {
+            worksheet.addRow({
+                name: company.name,
+                email: company.email,
+                website: company.website,
+                industry: company.industry,
+                foundedYear: company.foundedYear,
+                location: company.location,
+            });
+        });
+
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+        res.setHeader('Content-Disposition', 'attachment; filename=company-data.xlsx');
+
+        await workbook.xlsx.write(res);
+        res.end();
+    } catch (error) {
+        console.error('Error downloading to Excel:', error);
+        res.status(500).json({ error: 'Failed to download to Excel' });
     }
 };
