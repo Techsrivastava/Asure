@@ -11,7 +11,7 @@ const jobPostingSchema = new mongoose.Schema({
   },
   location: String,
   company: String,
-  salary: Number,
+  salary: String,
 });
 
 module.exports = mongoose.model('JobPosting', jobPostingSchema);
