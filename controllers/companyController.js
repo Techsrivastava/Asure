@@ -5,26 +5,26 @@ const ExcelJS = require('exceljs');
 
 exports.createCompany = async (req, res) => {
     try {
-        const { name, email,phone,  website, industry, foundedYear, location } = req.body;
+        const { companyName, companyEmail,companyPhone,  companywebsite, companyindustry, companyfoundedYear, companylocation } = req.body;
 
         console.log('Received company data:', req.body); // Log the received data
 
         // Check if required fields are missing
-        if (!name || !email || !phone || !website || !industry || !foundedYear || !location) {
+        if (!companyName || !companyEmail || !companyPhone || !companywebsite || !companyindustry || !companyfoundedYear || !companylocation) {
             console.error('Missing required fields'); // Log the error
             console.log('Creating a new company...');
-            console.log('Name:', name);
-            console.log('Email:', email);
-            console.log('Phone:', phone);
-            console.log('Website:', website);
-            console.log('Industry:', industry);
-            console.log('Founded Year:', foundedYear);
-            console.log('Location:', location);
+            console.log('Name:', companyName);
+            console.log('Email:', companyEmail);
+            console.log('Phone:', companyPhone);
+            console.log('Website:', companywebsite);
+            console.log('Industry:', companyindustry);
+            console.log('Founded Year:', companyfoundedYear);
+            console.log('Location:', companylocation);
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
 
-        const company = new Company({ name, email,phone, website, industry, foundedYear, location });
+        const company = new Company({ companyName, companyEmail,companyPhone, companywebsite, companyindustry, companyfoundedYear, companylocation });
 
         // Save the company to the database
         try {

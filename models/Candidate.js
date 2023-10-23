@@ -2,34 +2,34 @@
 const mongoose = require('mongoose');
 
 const candidateSchema = new mongoose.Schema({
-  name: {
+  candidateName: {
     type: String,
     required: true,
   },
-  phone: {
+  candidatePhone: {
     type: String,
     required: true,
   },
-  email: {
+  candidateEmail: {
     type: String,
     required: true,
     unique: true,
   },
-  gender: {
+  candidategender: {
     type: String,
     enum: ['Male', 'Female', 'Lgbtq2+'],
     required: true,
   },
-  status: {
+  candidatestatus: {
     type: String,
     enum: ['Fresher', 'Experienced', 'Career Shift','Career Restart','Veterans'],
     required: true,
   },
-  resume: {
+  candidateresume: {
     type: String,
     required: true,
   },
-  comments: {
+  candidatecomments: {
     type: String,
   },
 });

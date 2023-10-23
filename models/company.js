@@ -2,31 +2,31 @@
 const mongoose = require('mongoose');
 
 const companySchema = new mongoose.Schema({
-    name: {
+    companyName: {
         type: String,
         required: true,
     },
-    email: {
+    companyEmail: {
         type: String,
         required: true,
         unique: true,
         lowercase: true,
     },
-    phone:{
+    companyPhone:{
         type: String
     },
    
     
-    website: {
+    companywebsite: {
         type: String,
     },
-    industry: {
+    companyindustry: {
         type: String,
     },
-    foundedYear: {
+    companyfoundedYear: {
         type: Number,
     },
-    location: {
+    companylocation: {
         type: String,
     },
     // Add other fields as needed for your company signup form

@@ -9,30 +9,30 @@ const fs = require('fs');
 const createCandidate = async (req, res) => {
   try {
     // Fields from the form data
-    const { name, phone, email, gender, status, comments, industry } = req.body;
+    const { candidateName, candidatePhone, candidateEmail, candidategender, candidatestatus,candidateresume, candidatecomments, candidateindustry } = req.body;
 
     // Extract the filename from the uploaded file
     const resume = req.file ? req.file.filename : undefined;
 
     console.log('Received candidate creation request with the following data:');
-    console.log('Name:', name);
-    console.log('Phone:', phone);
-    console.log('Email:', email);
-    console.log('Gender:', gender);
-    console.log('Status:', status);
-    console.log('Resume:', resume);
-    console.log('Comments:', comments);
-    console.log('Industry:', industry);
+    console.log('Name:', candidateName);
+    console.log('Phone:', candidatePhone);
+    console.log('Email:', candidateEmail);
+    console.log('Gender:', candidategender);
+    console.log('Status:', candidatestatus);
+    console.log('Resume:', candidateresume);
+    console.log('Comments:', candidatecomments);
+    console.log('Industry:', candidateindustry);
 
     const candidate = new Candidate({
-      name,
-      phone,
-      email,
-      gender,
-      status,
-      resume, // Assign the filename to the 'resume' field
-      comments,
-      industry,
+      candidateName,
+      candidatePhone,
+      candidateEmail,
+      candidategender,
+      candidatestatus,
+      candidateresume, // Assign the filename to the 'resume' field
+     candidatecomments,
+      candidateindustry,
     });
 
     // Save the candidate using Promises
