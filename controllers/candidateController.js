@@ -9,7 +9,7 @@ const fs = require('fs');
 const createCandidate = async (req, res) => {
   try {
     // Fields from the form data
-    const { candidateName, candidatePhone, candidateEmail, candidategender, candidatestatus,candidateresume, candidatecomments, candidateindustry } = req.body;
+    const { candidateName, candidatePhone, candidateEmail, candidategender, candidatestatus,candidateresume, candidatecomments} = req.body;
 
     // Extract the filename from the uploaded file
     const resume = req.file ? req.file.filename : undefined;
@@ -22,7 +22,7 @@ const createCandidate = async (req, res) => {
     console.log('Status:', candidatestatus);
     console.log('Resume:', candidateresume);
     console.log('Comments:', candidatecomments);
-    console.log('Industry:', candidateindustry);
+    
 
     const candidate = new Candidate({
       candidateName,
@@ -32,7 +32,7 @@ const createCandidate = async (req, res) => {
       candidatestatus,
       candidateresume, // Assign the filename to the 'resume' field
      candidatecomments,
-      candidateindustry,
+      
     });
 
     // Save the candidate using Promises
